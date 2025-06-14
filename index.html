@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PATH Console Real v1</title>
+  <style>
+    body {
+      background-color: #0d1117;
+      color: #c9d1d9;
+      font-family: monospace;
+      padding: 2rem;
+      transition: background 1s ease;
+    }
+    .prompt { color: #58a6ff; }
+    .output { color: #8b949e; margin-bottom: 1.5rem; white-space: pre-wrap; }
+    input {
+      background: transparent;
+      border: none;
+      color: #58a6ff;
+      width: 100%;
+      font-family: monospace;
+      font-size: 1em;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="console">
+    <div class="output">🧠 PATH Console Real v1</div>
+    <div class="prompt">$ <input id="cmdInput" autofocus /></div>
+  </div>
+
+  <script>
+    const consoleDiv = document.getElementById("console");
+    const input = document.getElementById("cmdInput");
+
+    const responses = {
+      "status.sh": "✅ Estado emocional: centrado\n📦 Sistema técnico: en calma",
+      "automatizar_libertad.sh": "🛠 Automatización de PATH + KeySolveIT en marcha...",
+      "crear_assets.sh": "📄 Generando PDF desde memoria simbólica...",
+      "recordatorio.sh": "💬 Tu rol es sostener la visión, no operar todo.",
+      "emergencia.sh --modo \"reconectar sin castigo\"": "🚨 Emergencia emocional activada...\n🎵 Música reconectiva ejecutándose...\n📂 Abriendo archivo archive_emocional_001...",
+      "cierre_emocional.sh": "🌙 Cerrando sesión emocional...\n🖤 Apagando suavemente...",
+      "help": "Comandos disponibles:\nstatus.sh\nautomatizar_libertad.sh\ncrear_assets.sh\nrecordatorio.sh\nemergencia.sh --modo \"reconectar sin castigo\"\ncierre_emocional.sh"
+    };
+
+    input.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        const cmd = input.value.trim();
+        const outputText = responses[cmd] || "❌ Comando no reconocido. Escribe 'help' para ver opciones.";
+        const output = document.createElement("div");
+        output.className = "output";
+        output.innerText = "$ " + cmd + "\n" + outputText;
+        consoleDiv.insertBefore(output, input.parentElement);
+        input.value = "";
+        window.scrollTo(0, document.body.scrollHeight);
+
+        // Simular apagado suave
+        if (cmd === "cierre_emocional.sh") {
+          setTimeout(() => {
+            document.body.style.backgroundColor = "#000000";
+            consoleDiv.innerHTML = "<div class='output'>🖤 Sesión cerrada. Descansa.</div>";
+          }, 2000);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
